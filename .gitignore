@@ -1,0 +1,52 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output of the go tool
+*.out
+
+# GCP credentials file
+config/*.json
+
+# IDE or Editor specific files
+.vscode/
+.idea/
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.trace
+
+# Dependency directories
+/vendor/
+node_modules/
+
+# Go module files
+go.sum
+go.work
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test coverage files
+coverage.out
+*.cov
+
+# Build directories
+bin/
+build/
+
+# Environment files
+.env
+.env.*
+
+# Git specific files
+*.orig
