@@ -76,9 +76,9 @@ func PurchaseUnitsFromWallet(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
-	for i, p := range properties {
+	for i, p := range Properties {
 		if p.ID == propertyObjID {
-			property = &properties[i]
+			property = &Properties[i]
 			break
 		}
 	}

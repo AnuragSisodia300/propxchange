@@ -10,7 +10,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-var properties []schema.Property
+// var properties []schema.Property
+var Properties []schema.Property
 
 // CreateProperty handles property creation
 func CreateProperty(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +34,7 @@ func CreateProperty(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Add property to the in-memory store
-	properties = append(properties, property)
+	Properties = append(Properties, property)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
@@ -43,7 +44,7 @@ func CreateProperty(w http.ResponseWriter, r *http.Request) {
 // ListProperties lists all properties
 func ListProperties(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(properties)
+	json.NewEncoder(w).Encode(Properties)
 }
 
 // GetProperty retrieves a property by ID
@@ -54,7 +55,7 @@ func GetProperty(w http.ResponseWriter, id string) {
 		return
 	}
 
-	for _, property := range properties {
+	for _, property := range Properties {
 		if property.ID == objectID {
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(property)
@@ -80,7 +81,7 @@ func UpdateProperty(w http.ResponseWriter, r *http.Request, id string) {
 		return
 	}
 
-	for i, property := range properties {
+	for i, property := range Properties {
 		if property.ID == objectID {
 			// Update fields and recalculate
 			updatedProperty.ID = property.ID
@@ -92,7 +93,7 @@ func UpdateProperty(w http.ResponseWriter, r *http.Request, id string) {
 				updatedProperty.FundRaised = float64(updatedProperty.Units) * updatedProperty.PerUnitPrice
 			}
 
-			properties[i] = updatedProperty
+			Properties[i] = updatedProperty
 
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(updatedProperty)
@@ -111,9 +112,9 @@ func DeleteProperty(w http.ResponseWriter, id string) {
 		return
 	}
 
-	for i, property := range properties {
+	for i, property := range Properties {
 		if property.ID == objectID {
-			properties = append(properties[:i], properties[i+1:]...)
+			Properties = append(Properties[:i], Properties[i+1:]...)
 			w.WriteHeader(http.StatusNoContent)
 			return
 		}
@@ -151,15 +152,15 @@ func PurchaseUnits(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Update property fund and units
-	for i, property := range properties {
+	for i, property := range Properties {
 		if property.ID == propertyID {
 			if request.Units > property.Units {
 				http.Error(w, "Not enough units available", http.StatusBadRequest)
 				return
 			}
 
-			properties[i].Units -= request.Units
-			properties[i].FundRaised += request.Amount
+			Properties[i].Units -= request.Units
+			Properties[i].FundRaised += request.Amount
 
 			// Update user's purchased properties
 			for j, user := range users {
