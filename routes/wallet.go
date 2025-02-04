@@ -17,6 +17,8 @@ func WalletHandler(w http.ResponseWriter, r *http.Request) {
 			controllers.AddMoneyToWallet(w, r)
 		} else if action == "purchase" {
 			controllers.PurchaseUnitsFromWallet(w, r)
+		} else if action == "reward" {
+			controllers.AddMoneyToWallet(w, r)
 		} else {
 			http.Error(w, "Invalid action", http.StatusBadRequest)
 		}

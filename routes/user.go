@@ -9,9 +9,9 @@ func UserRoutes() {
 	http.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
-			controllers.ListUsers(w, r) // List all users
+			controllers.ListUsers(w, r)
 		case http.MethodPost:
-			controllers.CreateUser(w, r) // Create a new user
+			controllers.CreateUser(w, r)
 		default:
 			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		}
@@ -21,11 +21,11 @@ func UserRoutes() {
 		id := r.URL.Path[len("/users/"):]
 		switch r.Method {
 		case http.MethodGet:
-			controllers.GetUser(w, r, id) // Get a user by ID
+			controllers.GetUser(w, r, id)
 		case http.MethodPut:
-			controllers.UpdateUser(w, r, id) // Update a user
+			controllers.UpdateUser(w, r, id)
 		case http.MethodDelete:
-			controllers.DeleteUser(w, r, id) // Delete a user
+			controllers.DeleteUser(w, r, id)
 		default:
 			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		}

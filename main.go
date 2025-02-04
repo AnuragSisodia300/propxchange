@@ -10,6 +10,7 @@ func main() {
 	routes.UserRoutes()
 	routes.PaymentRoutes()
 	routes.FavoriteRoutes()
+	routes.CampaignRoutes()
 	routes.KYCProcessRoutes()
 	routes.WatchlistRoutes()
 	routes.PropertyRoutes()

@@ -55,10 +55,7 @@ func AddFavorite(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetFavorites handles the request to get all properties marked as favorites by a user
-func GetFavorites(w http.ResponseWriter, r *http.Request) {
-	userID := r.URL.Query().Get("userId")
-
-	// Parse user ID
+func GetFavorites(w http.ResponseWriter, r *http.Request, userID string) {
 	uID, err := primitive.ObjectIDFromHex(userID)
 	if err != nil {
 		http.Error(w, "Invalid user ID", http.StatusBadRequest)
@@ -77,8 +74,7 @@ func GetFavorites(w http.ResponseWriter, r *http.Request) {
 }
 
 // RemoveFavorite handles the request to remove a property from a user's favorites
-func RemoveFavorite(w http.ResponseWriter, r *http.Request) {
-	userID := r.URL.Query().Get("userId")
+func RemoveFavorite(w http.ResponseWriter, r *http.Request, userID string) {
 	propertyID := r.URL.Query().Get("propertyId")
 
 	// Parse user ID and property ID

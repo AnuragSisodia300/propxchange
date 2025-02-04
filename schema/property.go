@@ -23,5 +23,7 @@ type Property struct {
 	MaxIRR       float64            `bson:"max_irr" json:"max_irr"`
 	PerUnitPrice float64            `bson:"per_unit_price" json:"per_unit_price"`
 	FundRaised   float64            `bson:"fund_raised" json:"fund_raised"`
+	Longitude    float64            `bson:"longitude" json:"longitude"`
+	Latitude     float64            `bson:"latitude" json:"latitude"`
 	Units        int                `bson:"units" json:"units"`
 }

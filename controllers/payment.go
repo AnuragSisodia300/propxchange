@@ -19,7 +19,7 @@ type PaymentRequest struct {
 	Amount      float64 `json:"amount"`
 	Currency    string  `json:"currency"`
 	Description string  `json:"description"`
-	Source      string  `json:"source"` // Stripe token (e.g., generated from client)
+	Source      string  `json:"source"`
 }
 
 // HandlePayment processes the payment request
@@ -33,11 +33,11 @@ func HandlePayment(w http.ResponseWriter, r *http.Request) {
 
 	// Create a charge
 	params := &stripe.ChargeParams{
-		Amount:      stripe.Int64(int64(paymentReq.Amount * 100)), // Amount in cents
+		Amount:      stripe.Int64(int64(paymentReq.Amount * 100)),
 		Currency:    stripe.String(paymentReq.Currency),
 		Description: stripe.String(paymentReq.Description),
 	}
-	params.SetSource(paymentReq.Source) // Token from the frontend
+	params.SetSource(paymentReq.Source)
 
 	charge, err := charge.New(params)
 	if err != nil {
